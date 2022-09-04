@@ -27,8 +27,14 @@
                 on:click={() => {
                     const key = push(child(ref(database), "posts")).key;
                     update(ref(database, `posts/ ${key}`), post);
-                    post = { title: "", text: "" };
+                    post = { title: "", text: "", image: null };
                 }}>Сохранить</button
+            >
+            <button
+                class="btn btn-light"
+                on:click={() => {
+                    post = { title: "", text: "", image: null };
+                }}>Отмена</button
             >
         </div>
         <div class="col-2"><img class="img-fluid rounded" src={post.image} alt="" /></div>
@@ -40,7 +46,15 @@
         <div class="col">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">{item.title}</h5>
+                    <div class="d-flex justify-content-between">
+                        <h5 class="card-title">{item.title}</h5>
+                        <button
+                            class="btn btn-sm bg-white"
+                            on:click={() => {
+                                post = item;
+                            }}><i class="fa-solid fa-pen-to-square text-warning" /></button
+                        >
+                    </div>
                     <p class="card-text">{item.text}</p>
                 </div>
                 {#if item.image != null}
