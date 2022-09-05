@@ -5,7 +5,7 @@
     import { onMount } from "svelte";
     import { HtmlTag } from "svelte/internal";
 
-    let post = { key: "", value: { title: "", text: "", image: null } };
+    let post = { key: "", value: { title: "", text: "", image: null, tags: [] } };
     let posts = new Map();
 
     onMount(() => {
@@ -29,13 +29,11 @@
                     console.log(post.key);
                     if (post.key === "") {
                         const key = push(child(ref(database), "posts")).key;
-                        const key1 = push(child(ref(database), "tags")).key;
                         update(ref(database, `posts/${key}`), post.value);
-                        set(ref(database, "tags/" + key1), "привет");
                     } else {
                         update(ref(database, `posts/${post.key}`), post.value);
                     }
-                    post = { key: "", value: { title: "", text: "", image: null } };
+                    post = { key: "", value: { title: "", text: "", image: null, tags: [] } };
                 }}>Сохранить</button
             >
             <button

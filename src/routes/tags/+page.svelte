@@ -15,28 +15,30 @@
     });
 </script>
 
-<input
-    bind:value={tag.value}
-    on:keydown={e => {
-        if (e.key == "Enter" && !Object.values(tags).includes(tag.value)) {
-            push(ref(database, "tags"), tag.value);
-            tag = { key: "", value: "" };
-        }
-    }}
-    class="form-control mb-3"
-    placeholder="тег"
-/>
-<button
-    class="btn btn-dark"
-    on:click={() => {
-        if (!Object.values(tags).includes(tag.value)) {
-            push(ref(database, "tags"), tag.value);
-            tag = { key: "", value: "" };
-        }
-    }}>Добавить</button
->
+<div class="mt-5 d-flex align-items-center">
+    <div class="input-group me-2 w-auto">
+        <input
+            bind:value={tag.value}
+            on:keydown={e => {
+                if (e.key == "Enter" && !Object.values(tags).includes(tag.value)) {
+                    push(ref(database, "tags"), tag.value);
+                    tag = { key: "", value: "" };
+                }
+            }}
+            class="form-control"
+            placeholder="новый тег"
+        />
+        <button
+            class="btn btn-dark"
+            on:click={() => {
+                if (!Object.values(tags).includes(tag.value)) {
+                    push(ref(database, "tags"), tag.value);
+                    tag = { key: "", value: "" };
+                }
+            }}>Добавить</button
+        >
+    </div>
 
-<div class="mt-5">
     {#each Object.entries(tags) as [key, item]}
         <div class="badge bg-light text-dark me-1">
             <span style="cursor: default;">{item}</span>
