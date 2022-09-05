@@ -13,6 +13,13 @@
             console.log(tags);
         });
     });
+
+    function addTag() {
+        if (tag.value.replaceAll(" ", "").length > 0) {
+            push(ref(database, "tags"), tag.value);
+        }
+        tag = { key: "", value: "" };
+    }
 </script>
 
 <div class="d-flex align-items-center">
@@ -20,10 +27,7 @@
         <input
             bind:value={tag.value}
             on:keydown={e => {
-                if (e.key == "Enter" && !Object.values(tags).includes(tag.value)) {
-                    push(ref(database, "tags"), tag.value);
-                    tag = { key: "", value: "" };
-                }
+                if (e.key == "Enter" && !Object.values(tags).includes(tag.value)) addTag();
             }}
             class="form-control"
             placeholder="новый тег"
@@ -31,10 +35,7 @@
         <button
             class="btn btn-light border-secondary"
             on:click={() => {
-                if (!Object.values(tags).includes(tag.value)) {
-                    push(ref(database, "tags"), tag.value);
-                    tag = { key: "", value: "" };
-                }
+                if (!Object.values(tags).includes(tag.value)) addTag();
             }}><i class="fa-solid fa-circle-plus" /></button
         >
     </div>
