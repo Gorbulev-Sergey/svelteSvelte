@@ -15,7 +15,7 @@
     });
 </script>
 
-<div class="mt-5 d-flex align-items-center">
+<div class="d-flex align-items-center">
     <div class="input-group me-2 w-auto">
         <input
             bind:value={tag.value}
@@ -29,13 +29,13 @@
             placeholder="новый тег"
         />
         <button
-            class="btn btn-dark"
+            class="btn btn-light border-secondary"
             on:click={() => {
                 if (!Object.values(tags).includes(tag.value)) {
                     push(ref(database, "tags"), tag.value);
                     tag = { key: "", value: "" };
                 }
-            }}>Добавить</button
+            }}><i class="fa-solid fa-circle-plus" /></button
         >
     </div>
 
