@@ -49,12 +49,12 @@
     </div>
 </div>
 
-<div class="row row-cols-1 row-cols-md-4 g-4">
+<div class="row row-cols-1 row-cols-md-4 g-4 mb-5">
     {#each Object.entries(mapPosts) as [key, item]}
         <div class="col">
             <div class="card h-100">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-start">
                         <h5 class="card-title">{item.title}</h5>
                         <button
                             class="btn btn-sm bg-white"
@@ -63,7 +63,7 @@
                             }}><i class="fa-solid fa-pen-to-square text-warning" /></button
                         >
                     </div>
-                    <p class="card-text">{item.text}</p>
+                    <p class="card-text">{@html item.text}</p>
                 </div>
                 {#if item.image != null}
                     <img src={item.image} class="card-img-bottom" alt="..." />
