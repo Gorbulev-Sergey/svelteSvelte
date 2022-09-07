@@ -1,12 +1,12 @@
 <script>
     // @ts-nocheck
-    import { database } from "../../firebase/firebase.js";
+    import { database } from "$lib/firebase.js";
     import { ref, child, set, get, push, update, onValue, remove } from "firebase/database";
     import { onMount } from "svelte";
-    import { HtmlTag } from "svelte/internal";
+    import Post from "$lib/Post";
 
-    let post = { key: "", value: { title: "", text: "", image: null, tags: [] } };
     let posts = new Map();
+    let post = new Post();
 
     onMount(() => {
         onValue(ref(database, "posts"), snap => {
@@ -33,13 +33,13 @@
                     } else {
                         update(ref(database, `posts/${post.key}`), post.value);
                     }
-                    post = { key: "", value: { title: "", text: "", image: null, tags: [] } };
+                    post = new Post();
                 }}>Сохранить</button
             >
             <button
                 class="btn btn-light"
                 on:click={() => {
-                    post = { key: "", value: { title: "", text: "", image: null } };
+                    post = new Post();
                 }}>Отмена</button
             >
         </div>

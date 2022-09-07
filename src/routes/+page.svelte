@@ -1,6 +1,6 @@
 <script>
     // @ts-nocheck
-    import { database } from "../firebase/firebase.js";
+    import { database } from "$lib/firebase.js";
     import { ref, child, set, get } from "firebase/database";
     import { onMount } from "svelte";
 

@@ -1,10 +1,11 @@
 <script>
     // @ts-nocheck
-    import { database } from "../../firebase/firebase.js";
+    import { database } from "$lib/firebase.js";
     import { ref, child, set, get, push, update, onValue, remove } from "firebase/database";
+    import Tag from "$lib/Tag";
     import { onMount } from "svelte";
 
-    let tag = { key: "", value: "" };
+    let tag = new Tag();
     let tags = new Map();
 
     onMount(() => {
@@ -18,7 +19,7 @@
         if (tag.value.replaceAll(" ", "").length > 0) {
             push(ref(database, "tags"), tag.value);
         }
-        tag = { key: "", value: "" };
+        tag = new Tag();
     }
 </script>
 
